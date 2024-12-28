@@ -1,0 +1,79 @@
+/* Estilo básico da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* Título */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+/* Estilo do tempo de relacionamento (discreto) */
+.tempo p {
+    font-size: 1.2em;
+    opacity: 0.8;
+    transition: opacity 1s ease-in-out;
+}
+
+/* Coração */
+.heart p {
+    font-size: 3em;
+    color: #FF69B4;  /* Cor de rosa para o coração */
+    margin-top: 30px;
+}
+
+/* Estilo das fotos - Centralizando */
+.photos {
+    position: relative;
+    width: 500px;  /* Largura fixa */
+    height: 300px; /* Altura fixa */
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;  /* Garante que as imagens não saiam da área definida */
+}
+
+/* Imagens (todas têm o mesmo tamanho fixo) */
+.photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Faz com que as imagens cubram toda a área */
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+/* Mostrar imagem ativa */
+.photo.active {
+    opacity: 1;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em;
+    }
+    .photos {
+        width: 90%;
+        height: 200px;
+    }
+    .photo {
+        height: 100%;
+    }
+}
