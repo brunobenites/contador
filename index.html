@@ -1,28 +1,155 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contador Festivo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>Tempo com o Amor da Minha Vida</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Efeito de confete */
+        @keyframes confete {
+            0% { top: -10%; opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        .confete {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            animation: confete 3s infinite;
+            animation-delay: 0s;
+        }
+
+        .confete:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .confete:nth-child(2) { left: 25%; animation-delay: 0.5s; }
+        .confete:nth-child(3) { left: 40%; animation-delay: 1s; }
+        .confete:nth-child(4) { left: 60%; animation-delay: 1.5s; }
+        .confete:nth-child(5) { left: 80%; animation-delay: 2s; }
+
+        /* Estilo das imagens */
+        .imagem-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .imagem-container img {
+            border: 10px solid white;
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            margin: 10px;
+            animation: slide 10s infinite;
+        }
+
+        @keyframes slide {
+            0% { opacity: 0; transform: translateX(-50%) scale(1); }
+            20% { opacity: 1; transform: translateX(0) scale(1); }
+            40% { opacity: 1; transform: translateX(50%) scale(1); }
+            60% { opacity: 1; transform: translateX(100%) scale(1); }
+            80% { opacity: 0; transform: translateX(150%) scale(1); }
+            100% { opacity: 0; transform: translateX(200%) scale(1); }
+        }
+
+        .texto {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Estilo do contador */
+        .contador {
+            font-size: 2rem;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        /* Estilo do coração */
+        .coracao {
+            margin-top: 20px;
+            font-size: 3rem;
+            color: red;
+        }
+
+        /* Para o som */
+        audio {
+            position: absolute;
+            bottom: -9999px;
+        }
+
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="content">
-            <h1>Bem-vindo ao Contador Festivo!</h1>
-            <div class="counter" id="counter">0</div>
-            <div class="buttons">
-                <button id="startBtn">Iniciar</button>
-                <button id="stopBtn">Parar</button>
-                <button id="resetBtn">Zerar</button>
-            </div>
-            <div class="image-container">
-                <img src="sua-imagem.jpg" alt="Imagem Original" class="image">
-            </div>
-        </div>
+
+    <!-- Confetes animados -->
+    <div class="confete"></div>
+    <div class="confete"></div>
+    <div class="confete"></div>
+    <div class="confete"></div>
+    <div class="confete"></div>
+
+    <!-- Imagens -->
+    <div class="imagem-container">
+        <img src="imagem1.jpg" alt="Imagem 1">
+        <img src="imagem2.jpg" alt="Imagem 2">
+        <img src="imagem3.jpg" alt="Imagem 3">
+        <img src="imagem4.jpg" alt="Imagem 4">
+        <img src="imagem5.jpg" alt="Imagem 5">
+        <div class="texto">Tempo com o Amor da Minha Vida</div>
+
+        <!-- Contador -->
+        <div class="contador" id="contador"></div>
+
+        <!-- Coração -->
+        <div class="coracao">&#10084;</div>
     </div>
-    <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <!-- Música de fundo -->
+    <audio autoplay loop>
+        <source src="https://www.youtube.com/shorts/ZdP-KdBfFFY" type="audio/mp4">
+        Seu navegador não suporta áudio.
+    </audio>
+
+    <script>
+        // Definindo a data inicial para o contador
+        const dataInicial = new Date('2024-07-05T20:00:00');
+
+        // Função para atualizar o contador
+        function atualizarContador() {
+            const agora = new Date();
+            const tempoDecorrido = agora - dataInicial;
+
+            // Calculando dias, horas, minutos e segundos
+            const dias = Math.floor(tempoDecorrido / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((tempoDecorrido % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((tempoDecorrido % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((tempoDecorrido % (1000 * 60)) / 1000);
+
+            // Atualizando o texto do contador
+            document.getElementById('contador').innerHTML = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+        }
+
+        // Atualizar o contador a cada segundo
+        setInterval(atualizarContador, 1000);
+    </script>
+
 </body>
 </html>
